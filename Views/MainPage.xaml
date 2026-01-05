@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SmartHome.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:SmartHome.ViewModels"
+    xmlns:model="clr-namespace:SmartHome.Models"
+    BackgroundColor="#F5F8FF">
+
+	<ContentPage.BindingContext>
+		<vm:HomeViewModel />
+	</ContentPage.BindingContext>
+
+	<ScrollView>
+		<VerticalStackLayout Spacing="20" Padding="20">
+
+			<!-- Welcome Card -->
+			<Frame CornerRadius="24" HasShadow="True">
+				<Frame.Background>
+					<LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+						<GradientStop Color="#4F7CFF" Offset="0" />
+						<GradientStop Color="#9B4FFF" Offset="1" />
+					</LinearGradientBrush>
+				</Frame.Background>
+
+				<VerticalStackLayout Spacing="8">
+					<Label Text="Good Evening!" TextColor="White" FontSize="22" FontAttributes="Bold"/>
+					<Label Text="Your home is comfortable and secure" TextColor="#EAEAFF"/>
+					<HorizontalStackLayout Spacing="20">
+						<Label Text="🔒 Secure" TextColor="White"/>
+						<Label Text="⚡ 89% Efficient" TextColor="White"/>
+						<Label Text="24°C" TextColor="White" FontAttributes="Bold"/>
+					</HorizontalStackLayout>
+				</VerticalStackLayout>
+			</Frame>
+
+			<!-- Stats -->
+			<Grid ColumnDefinitions="*,*" RowDefinitions="*,*" RowSpacing="16" ColumnSpacing="16">
+				<Frame Grid.Row="0" Grid.Column="0" CornerRadius="16" BackgroundColor="#E8FFF1">
+					<Label Text="{Binding ActiveDevices, StringFormat='{}{0} Active Now'}"
+                           TextColor="#1DB954" FontAttributes="Bold"/>
+				</Frame>
+				<Frame Grid.Row="0" Grid.Column="1" CornerRadius="16" BackgroundColor="#E9F2FF">
+					<Label Text="{Binding Efficiency, StringFormat='{}{0}% Efficiency'}"
+                           TextColor="#2F80ED" FontAttributes="Bold"/>
+				</Frame>
+				<Frame Grid.Row="1" Grid.Column="0" CornerRadius="16" BackgroundColor="#F2E9FF">
+					<Label Text="{Binding FamilyMembers, StringFormat='{}{0} Family Home'}"
+                           TextColor="#9B51E0" FontAttributes="Bold"/>
+				</Frame>
+				<Frame Grid.Row="1" Grid.Column="1" CornerRadius="16" BackgroundColor="#FFF4E5">
+					<Label Text="24/7 Monitoring" TextColor="#F2994A" FontAttributes="Bold"/>
+				</Frame>
+			</Grid>
+
+			<!-- Quick Actions -->
+			<Frame CornerRadius="24" Padding="16">
+				<VerticalStackLayout Spacing="12">
+					<Label Text="Quick Actions" FontAttributes="Bold"/>
+					<HorizontalStackLayout Spacing="12">
+						<Button Text="All On"
+                                Command="{Binding AllOnCommand}"
+                                BackgroundColor="#6A5CFF"
+                                TextColor="White"
+                                CornerRadius="20"
+                                HorizontalOptions="FillAndExpand"/>
+						<Button Text="Night Mode"
+                                Command="{Binding NightModeCommand}"
+                                BackgroundColor="White"
+                                BorderColor="#DDD"
+                                BorderWidth="1"
+                                CornerRadius="20"
+                                HorizontalOptions="FillAndExpand"/>
+					</HorizontalStackLayout>
+				</VerticalStackLayout>
+			</Frame>
+
+			<!-- Device List -->
+			<CollectionView ItemsSource="{Binding Devices}">
+				<CollectionView.ItemTemplate>
+					<DataTemplate x:DataType="model:SmartDevice">
+						<Frame CornerRadius="24" Padding="16" Margin="0,6">
+							<Grid ColumnDefinitions="Auto,*,Auto">
+								<Frame WidthRequest="40" HeightRequest="40" CornerRadius="20"
+                                       BackgroundColor="#EEE" VerticalOptions="Center">
+									<Label Text="⚙" HorizontalOptions="Center" VerticalOptions="Center"/>
+								</Frame>
+
+								<VerticalStackLayout Grid.Column="1" Padding="12,0">
+									<Label Text="{Binding Name}" FontAttributes="Bold"/>
+									<Label Text="{Binding Room}" FontSize="12" TextColor="Gray"/>
+								</VerticalStackLayout>
+
+								<Switch Grid.Column="2"
+                                        IsToggled="{Binding IsOn, Mode=TwoWay}"
+                                        VerticalOptions="Center"/>
+							</Grid>
+						</Frame>
+					</DataTemplate>
+				</CollectionView.ItemTemplate>
+			</CollectionView>
+
+		</VerticalStackLayout>
+	</ScrollView>
+</ContentPage>
