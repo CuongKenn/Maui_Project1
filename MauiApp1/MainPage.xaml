@@ -1,0 +1,507 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.MainPage"
+             BackgroundColor="{AppThemeBinding Light={StaticResource BackgroundLight}, Dark={StaticResource BackgroundDark}}">
+
+    <!-- Mobile Container with Max Width -->
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" MinWidth="0"/>
+            <ColumnDefinition Width="Auto" MaxWidth="480"/>
+            <ColumnDefinition Width="*" MinWidth="0"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Left Spacer -->
+        <BoxView Grid.Column="0" Color="Transparent"/>
+
+        <!-- Main Content - Mobile Width -->
+        <Grid Grid.Column="1" 
+              WidthRequest="480"
+              HorizontalOptions="Center"
+              VerticalOptions="Fill">
+
+            <ScrollView>
+                <VerticalStackLayout Spacing="0" Padding="0">
+
+                    <!-- Header Section -->
+                    <Grid Padding="24,40,24,8"
+                          ColumnDefinitions="*,Auto"
+                          ColumnSpacing="12">
+
+                        <VerticalStackLayout Grid.Column="0" Spacing="4">
+                            <Label Text="GOOD EVENING"
+                                   FontSize="12"
+                                   FontAttributes="None"
+                                   TextColor="{AppThemeBinding Light=#64748b, Dark=#9ca7ba}"
+                                   CharacterSpacing="1"/>
+                            <Label Text="Alex"
+                                   FontSize="32"
+                                   FontAttributes="Bold"
+                                   TextColor="{AppThemeBinding Light=#0f172a, Dark=White}"/>
+                        </VerticalStackLayout>
+
+                        <!-- User Avatar -->
+                        <Grid Grid.Column="1" WidthRequest="56" HeightRequest="56">
+                            <Border StrokeThickness="0"
+                                    BackgroundColor="Transparent"
+                                    WidthRequest="56"
+                                    HeightRequest="56">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="28"/>
+                                </Border.StrokeShape>
+                                <Image Source="dotnet_bot.png"
+                                       Aspect="AspectFill"
+                                       WidthRequest="56"
+                                       HeightRequest="56"/>
+                            </Border>
+                            <!-- Notification Dot -->
+                            <Ellipse WidthRequest="14"
+                                     HeightRequest="14"
+                                     Fill="#EF4444"
+                                     HorizontalOptions="End"
+                                     VerticalOptions="Start"
+                                     Margin="0,2,2,0">
+                                <Ellipse.Stroke>
+                                    <SolidColorBrush Color="{AppThemeBinding Light={StaticResource BackgroundLight}, Dark={StaticResource BackgroundDark}}"/>
+                                </Ellipse.Stroke>
+                                <Ellipse.StrokeThickness>3</Ellipse.StrokeThickness>
+                            </Ellipse>
+                        </Grid>
+                    </Grid>
+
+                    <!-- Weather Card - Beautiful Gradient -->
+                    <Border Margin="24,24,24,0"
+                            Padding="24"
+                            HeightRequest="180"
+                            BackgroundColor="Transparent">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="20"/>
+                        </Border.StrokeShape>
+                        <Border.Shadow>
+                            <Shadow Brush="Black" Offset="0,8" Radius="24" Opacity="0.3"/>
+                        </Border.Shadow>
+
+                        <!-- Multi-layer Gradient Background -->
+                        <Grid>
+                            <!-- Base Blue Gradient -->
+                            <BoxView CornerRadius="20">
+                                <BoxView.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                        <GradientStop Color="#3b82f6" Offset="0"/>
+                                        <GradientStop Color="#2563eb" Offset="0.5"/>
+                                        <GradientStop Color="#1e40af" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </BoxView.Background>
+                            </BoxView>
+                            <!-- Dark Overlay Bottom -->
+                            <BoxView CornerRadius="20">
+                                <BoxView.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Color="#00000000" Offset="0"/>
+                                        <GradientStop Color="#00000040" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </BoxView.Background>
+                            </BoxView>
+                            <!-- Light Overlay Top -->
+                            <BoxView CornerRadius="20">
+                                <BoxView.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Color="#FFFFFF20" Offset="0"/>
+                                        <GradientStop Color="#00000000" Offset="0.3"/>
+                                    </LinearGradientBrush>
+                                </BoxView.Background>
+                            </BoxView>
+                        </Grid>
+
+                        <!-- Content -->
+                        <Grid RowDefinitions="*,Auto" Padding="0">
+                            <!-- Top Row: Temperature and Sun -->
+                            <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
+                                <VerticalStackLayout Grid.Column="0" Spacing="2" VerticalOptions="Start">
+                                    <Label Text="24°C"
+                                           FontSize="56"
+                                           FontAttributes="Bold"
+                                           TextColor="White"
+                                           HorizontalTextAlignment="Start"/>
+                                    <Label Text="Feels like 28°"
+                                           FontSize="14"
+                                           FontAttributes="None"
+                                           TextColor="White"
+                                           Opacity="0.8"
+                                           HorizontalTextAlignment="Start"/>
+                                </VerticalStackLayout>
+                                <Label Text="☀️"
+                                       FontSize="64"
+                                       HorizontalOptions="End"
+                                       VerticalOptions="Start"
+                                       Margin="0,-8,0,0"/>
+                            </Grid>
+
+                            <!-- Bottom Row: Location and AQI -->
+                            <Grid Grid.Row="1" ColumnDefinitions="*,Auto">
+                                <VerticalStackLayout Grid.Column="0" Spacing="6">
+                                    <Label Text="Cloudy"
+                                           FontSize="18"
+                                           FontAttributes="Bold"
+                                           TextColor="White"
+                                           HorizontalTextAlignment="Start"/>
+                                    <HorizontalStackLayout Spacing="6">
+                                        <Label Text="📍"
+                                               FontSize="14"
+                                               VerticalOptions="Center"/>
+                                        <Label Text="New York, USA"
+                                               FontSize="13"
+                                               FontAttributes="None"
+                                               TextColor="White"
+                                               Opacity="0.9"
+                                               VerticalOptions="Center"/>
+                                    </HorizontalStackLayout>
+                                </VerticalStackLayout>
+                                <Border BackgroundColor="#FFFFFF25"
+                                        Padding="10,6"
+                                        HorizontalOptions="End"
+                                        VerticalOptions="End">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="8"/>
+                                    </Border.StrokeShape>
+                                    <Label Text="AQI 32"
+                                           FontSize="13"
+                                           FontAttributes="Bold"
+                                           TextColor="White"/>
+                                </Border>
+                            </Grid>
+                        </Grid>
+                    </Border>
+
+                    <!-- My Devices Section -->
+                    <VerticalStackLayout Spacing="16" Margin="24,32,24,0">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Grid.Column="0"
+                                   Text="My Devices"
+                                   FontSize="20"
+                                   FontAttributes="Bold"
+                                   TextColor="{AppThemeBinding Light=#0f172a, Dark=White}"
+                                   VerticalOptions="Center"/>
+                            <Label Grid.Column="1"
+                                   Text="See All"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource Primary}"
+                                   VerticalOptions="Center"/>
+                        </Grid>
+
+                        <Grid ColumnDefinitions="*,*"
+                              RowDefinitions="*,*"
+                              ColumnSpacing="16"
+                              RowSpacing="16">
+
+                            <!-- Device 1: Living Room Light -->
+                            <Border Grid.Row="0" Grid.Column="0"
+                                    Padding="20"
+                                    BackgroundColor="{AppThemeBinding Light=White, Dark=#1e293b}"
+                                    StrokeThickness="0"
+                                    HeightRequest="150">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="20"/>
+                                </Border.StrokeShape>
+                                <Border.Shadow>
+                                    <Shadow Brush="Black" Offset="0,4" Radius="12" Opacity="0.1"/>
+                                </Border.Shadow>
+
+                                <Grid RowDefinitions="Auto,*,Auto">
+                                    <!-- Icon -->
+                                    <Border Grid.Row="0"
+                                            BackgroundColor="#FCD34D"
+                                            Padding="12"
+                                            WidthRequest="48"
+                                            HeightRequest="48"
+                                            HorizontalOptions="Start">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="12"/>
+                                        </Border.StrokeShape>
+                                        <Label Text="💡"
+                                               FontSize="24"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center"/>
+                                    </Border>
+
+                                    <!-- Spacer -->
+                                    <BoxView Grid.Row="1" Color="Transparent"/>
+
+                                    <!-- Text and Toggle -->
+                                    <Grid Grid.Row="2" ColumnDefinitions="*,Auto">
+                                        <VerticalStackLayout Grid.Column="0" Spacing="4">
+                                            <Label Text="Living Room"
+                                                   FontSize="16"
+                                                   FontAttributes="Bold"
+                                                   TextColor="{AppThemeBinding Light=#0f172a, Dark=White}"/>
+                                            <Label Text="ON"
+                                                   FontSize="12"
+                                                   FontAttributes="Bold"
+                                                   TextColor="{StaticResource Primary}"/>
+                                        </VerticalStackLayout>
+                                        <Switch Grid.Column="1"
+                                                IsToggled="True"
+                                                OnColor="{StaticResource Primary}"
+                                                ThumbColor="White"
+                                                VerticalOptions="Center"
+                                                Scale="0.8"/>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+
+                            <!-- Device 2: Ceiling Fan -->
+                            <Border Grid.Row="0" Grid.Column="1"
+                                    Padding="20"
+                                    BackgroundColor="{AppThemeBinding Light=White, Dark=#1e293b}"
+                                    StrokeThickness="0"
+                                    HeightRequest="150"
+                                    Opacity="0.7">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="20"/>
+                                </Border.StrokeShape>
+                                <Border.Shadow>
+                                    <Shadow Brush="Black" Offset="0,4" Radius="12" Opacity="0.1"/>
+                                </Border.Shadow>
+
+                                <Grid RowDefinitions="Auto,*,Auto">
+                                    <Border Grid.Row="0"
+                                            BackgroundColor="{AppThemeBinding Light=#e2e8f0, Dark=#334155}"
+                                            Padding="12"
+                                            WidthRequest="48"
+                                            HeightRequest="48"
+                                            HorizontalOptions="Start">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="12"/>
+                                        </Border.StrokeShape>
+                                        <Label Text="🌀"
+                                               FontSize="24"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center"/>
+                                    </Border>
+
+                                    <BoxView Grid.Row="1" Color="Transparent"/>
+
+                                    <Grid Grid.Row="2" ColumnDefinitions="*,Auto">
+                                        <VerticalStackLayout Grid.Column="0" Spacing="4">
+                                            <Label Text="Ceiling Fan"
+                                                   FontSize="16"
+                                                   FontAttributes="Bold"
+                                                   TextColor="{AppThemeBinding Light=#0f172a, Dark=White}"/>
+                                            <Label Text="OFF"
+                                                   FontSize="12"
+                                                   FontAttributes="None"
+                                                   TextColor="{AppThemeBinding Light=#64748b, Dark=#94a3b8}"/>
+                                        </VerticalStackLayout>
+                                        <Switch Grid.Column="1"
+                                                IsToggled="False"
+                                                OnColor="{StaticResource Primary}"
+                                                ThumbColor="White"
+                                                VerticalOptions="Center"
+                                                Scale="0.8"/>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+
+                            <!-- Device 3: Air Condition -->
+                            <Border Grid.Row="1" Grid.Column="0"
+                                    Padding="20"
+                                    BackgroundColor="{AppThemeBinding Light=White, Dark=#1e293b}"
+                                    StrokeThickness="0"
+                                    HeightRequest="150">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="20"/>
+                                </Border.StrokeShape>
+                                <Border.Shadow>
+                                    <Shadow Brush="Black" Offset="0,4" Radius="12" Opacity="0.1"/>
+                                </Border.Shadow>
+
+                                <Grid RowDefinitions="Auto,*,Auto">
+                                    <Border Grid.Row="0"
+                                            BackgroundColor="#22D3EE"
+                                            Padding="12"
+                                            WidthRequest="48"
+                                            HeightRequest="48"
+                                            HorizontalOptions="Start">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="12"/>
+                                        </Border.StrokeShape>
+                                        <Label Text="❄️"
+                                               FontSize="24"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center"/>
+                                    </Border>
+
+                                    <BoxView Grid.Row="1" Color="Transparent"/>
+
+                                    <Grid Grid.Row="2" ColumnDefinitions="*,Auto">
+                                        <VerticalStackLayout Grid.Column="0" Spacing="4">
+                                            <Label Text="Air Condition"
+                                                   FontSize="16"
+                                                   FontAttributes="Bold"
+                                                   TextColor="{AppThemeBinding Light=#0f172a, Dark=White}"/>
+                                            <Label Text="22°C"
+                                                   FontSize="12"
+                                                   FontAttributes="Bold"
+                                                   TextColor="{StaticResource Primary}"/>
+                                        </VerticalStackLayout>
+                                        <Switch Grid.Column="1"
+                                                IsToggled="True"
+                                                OnColor="{StaticResource Primary}"
+                                                ThumbColor="White"
+                                                VerticalOptions="Center"
+                                                Scale="0.8"/>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+
+                            <!-- Device 4: Front Door -->
+                            <Border Grid.Row="1" Grid.Column="1"
+                                    Padding="20"
+                                    BackgroundColor="{AppThemeBinding Light=White, Dark=#1e293b}"
+                                    StrokeThickness="0"
+                                    HeightRequest="150">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="20"/>
+                                </Border.StrokeShape>
+                                <Border.Shadow>
+                                    <Shadow Brush="Black" Offset="0,4" Radius="12" Opacity="0.1"/>
+                                </Border.Shadow>
+
+                                <Grid RowDefinitions="Auto,*,Auto">
+                                    <Border Grid.Row="0"
+                                            BackgroundColor="#A78BFA"
+                                            Padding="12"
+                                            WidthRequest="48"
+                                            HeightRequest="48"
+                                            HorizontalOptions="Start">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="12"/>
+                                        </Border.StrokeShape>
+                                        <Label Text="🔒"
+                                               FontSize="24"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center"/>
+                                    </Border>
+
+                                    <BoxView Grid.Row="1" Color="Transparent"/>
+
+                                    <Grid Grid.Row="2" ColumnDefinitions="*,Auto">
+                                        <VerticalStackLayout Grid.Column="0" Spacing="4">
+                                            <Label Text="Front Door"
+                                                   FontSize="16"
+                                                   FontAttributes="Bold"
+                                                   TextColor="{AppThemeBinding Light=#0f172a, Dark=White}"/>
+                                            <Label Text="Locked"
+                                                   FontSize="12"
+                                                   FontAttributes="Bold"
+                                                   TextColor="{StaticResource Primary}"/>
+                                        </VerticalStackLayout>
+                                        <Switch Grid.Column="1"
+                                                IsToggled="True"
+                                                OnColor="{StaticResource Primary}"
+                                                ThumbColor="White"
+                                                VerticalOptions="Center"
+                                                Scale="0.8"/>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </VerticalStackLayout>
+
+                    <!-- Daily Energy Usage Section -->
+                    <Border Margin="24,32,24,40"
+                            Padding="24"
+                            BackgroundColor="{AppThemeBinding Light=White, Dark=#1e293b}"
+                            StrokeThickness="0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="20"/>
+                        </Border.StrokeShape>
+                        <Border.Shadow>
+                            <Shadow Brush="Black" Offset="0,4" Radius="12" Opacity="0.1"/>
+                        </Border.Shadow>
+
+                        <VerticalStackLayout Spacing="20">
+                            <Grid ColumnDefinitions="Auto,*,Auto">
+                                <Border Grid.Column="0"
+                                        BackgroundColor="#10B981"
+                                        Padding="10"
+                                        WidthRequest="44"
+                                        HeightRequest="44">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="12"/>
+                                    </Border.StrokeShape>
+                                    <Label Text="⚡"
+                                           FontSize="24"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center"/>
+                                </Border>
+
+                                <VerticalStackLayout Grid.Column="1" Spacing="4" Margin="16,0,0,0" VerticalOptions="Center">
+                                    <Label Text="Daily Energy Usage"
+                                           FontSize="16"
+                                           FontAttributes="Bold"
+                                           TextColor="{AppThemeBinding Light=#0f172a, Dark=White}"/>
+                                    <Label Text="Today"
+                                           FontSize="13"
+                                           FontAttributes="None"
+                                           TextColor="{AppThemeBinding Light=#64748b, Dark=#94a3b8}"/>
+                                </VerticalStackLayout>
+
+                                <HorizontalStackLayout Grid.Column="2" Spacing="4" VerticalOptions="Center">
+                                    <Label Text="12.4"
+                                           FontSize="24"
+                                           FontAttributes="Bold"
+                                           TextColor="{AppThemeBinding Light=#0f172a, Dark=White}"
+                                           VerticalOptions="Center"/>
+                                    <Label Text="kWh"
+                                           FontSize="14"
+                                           FontAttributes="None"
+                                           TextColor="{AppThemeBinding Light=#64748b, Dark=#94a3b8}"
+                                           VerticalOptions="Center"
+                                           Margin="0,4,0,0"/>
+                                </HorizontalStackLayout>
+                            </Grid>
+
+                            <!-- Progress Bar -->
+                            <VerticalStackLayout Spacing="12">
+                                <Grid HeightRequest="10">
+                                    <BoxView BackgroundColor="{AppThemeBinding Light=#e2e8f0, Dark=#334155}"
+                                             CornerRadius="5"
+                                             HorizontalOptions="Fill"/>
+                                    <BoxView BackgroundColor="{StaticResource Primary}"
+                                             CornerRadius="5"
+                                             WidthRequest="200"
+                                             HorizontalOptions="Start"/>
+                                </Grid>
+
+                                <Grid ColumnDefinitions="*,Auto,*">
+                                    <Label Grid.Column="0"
+                                           Text="0 kWh"
+                                           FontSize="12"
+                                           TextColor="{AppThemeBinding Light=#64748b, Dark=#94a3b8}"
+                                           HorizontalTextAlignment="Start"/>
+                                    <Label Grid.Column="1"
+                                           Text="45% used"
+                                           FontSize="13"
+                                           FontAttributes="Bold"
+                                           TextColor="{StaticResource Primary}"
+                                           HorizontalTextAlignment="Center"/>
+                                    <Label Grid.Column="2"
+                                           Text="30 kWh"
+                                           FontSize="12"
+                                           TextColor="{AppThemeBinding Light=#64748b, Dark=#94a3b8}"
+                                           HorizontalTextAlignment="End"/>
+                                </Grid>
+                            </VerticalStackLayout>
+                        </VerticalStackLayout>
+                    </Border>
+                </VerticalStackLayout>
+            </ScrollView>
+        </Grid>
+
+        <!-- Right Spacer -->
+        <BoxView Grid.Column="2" Color="Transparent"/>
+    </Grid>
+</ContentPage>
